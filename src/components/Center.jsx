@@ -23,6 +23,7 @@ export default function Center() {
     const [num,setNum] = useState(0)
     console.log(data)
     useEffect(()=>{
+        setData([])
         axios('https://twitter-api23.herokuapp.com/').then((res)=>{
             console.log(res.data)
             setData(res.data)

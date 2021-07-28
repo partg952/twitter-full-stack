@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 body{
     font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
 }
 #top-center{
     display: flex;
@@ -10,9 +11,9 @@ body{
     justify-content: space-between;
     background-color: transparent;
     border: 1px solid rgb(187, 184, 184);
-    width: 100%;
-    padding: 10px;
-    height: 30px;
+    width:103%;
+    /* padding: 0.5px; */
+    height: 50px;
     border-bottom: 0;
 }
 .first{
@@ -29,14 +30,16 @@ body{
     border: 0;
     outline: none;
     font-size: 15px;
+    width:70%;
 }
 #center-center{
     /* padding: 10px; */
     width: 103%;
     border: 1px solid rgb(187, 184, 184) ;
 }
+
 .center{
-    width: 50%;
+    width: 50vw;
     align-items: center;
     justify-content: center;
     margin-left: auto;
@@ -117,10 +120,17 @@ main *{
 }
 
 #image{
-    width: 300px;
-    height: auto;
     margin-left: auto;
     margin-right: auto;
     border-radius: 20px;
     display: flex;
+    object-fit: contain;
+}
+
+@media only screen and (max-width: 670px){
+    .center{
+        
+        margin-left:auto;
+        width:70vw;
+    }
 }

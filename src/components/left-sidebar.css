@@ -19,3 +19,9 @@ body::-webkit-scrollbar-thumb{
 body::-webkit-scrollbar-thumb:hover{
     background-color: rgb(153, 152, 152);
 }
+
+@media only screen and (max-width: 1300px){
+    .left-sidebar{
+        display:none;
+    }
+}

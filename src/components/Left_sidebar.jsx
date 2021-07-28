@@ -6,10 +6,6 @@ export default function Left_sidebar() {
     return (
         <div className='left-sidebar'>
 
-
-    
-
-
     <Timeline
    
   dataSource={{

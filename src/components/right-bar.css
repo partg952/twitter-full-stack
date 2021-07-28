@@ -13,7 +13,7 @@
 }
 
 span{
-    margin: 20px;
+    margin: 15px;
     position: relative;
     color: black;
     display: flex;
@@ -51,7 +51,7 @@ span p{
 #logo-span img{
     height: 50px;
 }
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 1050px){
 	span p{
         display: none;
     }
@@ -60,23 +60,22 @@ span p{
         right: 0;
     }
     span{
-        margin: 10px;
+        margin: 2px;
         padding: 20px;
         align-items: center;
         justify-content: center;
         width: 10px;
-        height: 10px;
+        height: 10px; 
         border-radius: 50px;
     }
     .right-sidebar{
+        position:fixed;
         left: 0;
     }
     #logo-span img{
         height: 30px;
     }
-    #tweet-button{
-        display: none;
-    }
+    
 }
 
 
@@ -86,8 +85,9 @@ span p{
     display: flex;
     border: 0;
     outline: 0;
+    margin-bottom:50px;
     background-color: #3aa9ee;
-    width: 200px;
+    width: 150px;
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -96,3 +96,10 @@ span p{
     font-weight: bold;
     padding: 10px;
 }
+
+@media only screen and (max-width: 1050px){
+    #tweet-button2{
+        display:none;
+    }
+}   
+

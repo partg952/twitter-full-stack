@@ -7,15 +7,17 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {useState,useEffect,useRef} from 'react';
 import firebaseConfig from '../firebase';
 import Loader from "react-loader-spinner";
-import { Button } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
 import Sound from '../assets/twitter.mp3';
-import { MessageSharp } from '@material-ui/icons';
-import { LoopSharp } from '@material-ui/icons';
-import { FavoriteSharp } from '@material-ui/icons';
-import { ShareSharp } from '@material-ui/icons';
+import Retweet from '../assets/retweet.svg';
+import Like from '../assets/like.svg';
+import Share from '../assets/share.svg';
+import Comment from '../assets/comment.svg';
 import axios from 'axios';
 export default function Center() {
+
+    
+
     const tweet = useRef();
     const image_url = useRef();
     const sound_ref = useRef();
@@ -23,12 +25,24 @@ export default function Center() {
     const [num,setNum] = useState(0)
     console.log(data)
     useEffect(()=>{
-        setData([])
         axios('https://twitter-api23.herokuapp.com/').then((res)=>{
             console.log(res.data)
-            setData(res.data)
+            setData(res.data.reverse())
         })
     },[num])
+    function UploadData(){
+        var name = uuidv4();
+        if(tweet.current.value.length!=0){
+            axios(`https://twitter-api23.herokuapp.com/add-tweets?tweet=${tweet.current.value}&url=${image_url.current.value}&user-name=${firebase.auth().currentUser.displayName}&user-image=${firebase.auth().currentUser.photoURL}`)
+            .then(()=>{
+                setNum(num+1)
+            })
+            sound_ref.current.play();
+            tweet.current.value = ''
+            image_url.current.value = ''
+        }
+        
+    }
     return (
         <div className='center'>
             <audio src={Sound} ref={sound_ref} />
@@ -43,23 +57,17 @@ export default function Center() {
                         <Avatar src={firebase.auth().currentUser.photoURL}/>:
                         <Avatar/>
                     }
-                    <input type="text" placeholder="What's Happening?" ref={tweet} />
+                    <input type="text" placeholder="What's Happening?" id='tweet-value' ref={tweet} onKeyPress={(e)=>{
+                        if(e.key === 'Enter'){
+                            UploadData();
+                        }
+                    }}/>
                 </div>
                 <div className='second'>
             <input type="text" id='image-url' placeholder='Image URL (optional)' ref={image_url}/>
             <br />
             <button id='tweet-button' onClick={()=>{
-                var name = uuidv4();
-                if(tweet.current.value.length!=0){
-                    axios(`https://twitter-api23.herokuapp.com/add-tweets?tweet=${tweet.current.value}&url=${image_url.current.value}&user-name=${firebase.auth().currentUser.displayName}&user-image=${firebase.auth().currentUser.photoURL}`)
-                    .then(()=>{
-                        setNum(num+1)
-                    })
-                    sound_ref.current.play();
-                    tweet.current.value = ''
-                    image_url.current.value = ''
-                }
-                
+                UploadData();
             }}>Tweet</button>
                 </div>
             <hr />
@@ -88,10 +96,10 @@ export default function Center() {
                                    <></>
                                }
                                    <div className="icons">
-                                       <MessageSharp/>
-                                       <LoopSharp/>
-                                       <FavoriteSharp/>
-                                       <ShareSharp/>
+                                       <img src={Comment} alt="" />
+                                       <img src={Retweet} alt="" />
+                                       <img src={Like} alt="" />
+                                       <img src={Share} alt="" />
                                    </div>
                            </div>
                        )
